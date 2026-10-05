@@ -1,0 +1,23 @@
+// Receives an order from the website and sends it to your Telegram.
+// Set BOT_TOKEN and CHAT_ID in Netlify > Site settings > Environment variables.
+exports.handler = async (event) => {
+  if (event.httpMethod !== "POST") return { statusCode: 405, body: "Method not allowed" };
+  let o;
+  try { o = JSON.parse(event.body); } catch { return { statusCode: 400, body: "Bad request" }; }
+  if (o.website) return { statusCode: 200, body: "ok" }; // spam trap
+  const clean = (s, n = 300) => String(s || "").replace(/[<>]/g, "").trim().slice(0, n);
+  const phone = clean(o.phone, 15).replace(/\D/g, "");
+  if (!clean(o.name) || phone.length < 10 || !clean(o.address) || !/^\d{6}$/.test(clean(o.pincode, 6)))
+    return { statusCode: 400, body: "Missing or invalid details" };
+  const text =
+    "🛒 New order - Unstoppable Tech\n\n" +
+    `Product: ${clean(o.product)}\nQty: ${clean(o.qty, 3)}\nPrice: ₹${clean(o.price, 10)}\n\n` +
+    `Name: ${clean(o.name)}\nPhone: ${phone}\nAddress: ${clean(o.address)}\nPincode: ${clean(o.pincode, 6)}\n` +
+    `Payment: ${clean(o.payment, 20)}`;
+  const r = await fetch(`https://api.telegram.org/bot${process.env.BOT_TOKEN}/sendMessage`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ chat_id: process.env.CHAT_ID, text }),
+  });
+  return { statusCode: r.ok ? 200 : 502, body: r.ok ? "ok" : "Telegram error" };
+};

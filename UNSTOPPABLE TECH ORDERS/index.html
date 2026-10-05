@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unstoppable Tech - Phones, accessories and creator gear</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3f1ec;--ink:#17202a;--mute:#5d6873;--card:#fff;--line:#ddd9d0;--hot:#ff4d2e;--blue:#1d3cff;--r:14px}
+@media(prefers-color-scheme:dark){:root{--bg:#10151b;--ink:#eef0f2;--mute:#9aa5b0;--card:#18202a;--line:#27313c}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Figtree,system-ui,sans-serif}
+h1,h2,h3{font-family:"Bricolage Grotesque",Figtree,sans-serif;line-height:1.05;margin:0}
+.wrap{max-width:1100px;margin:auto;padding:0 20px}
+header{padding:56px 0 28px}
+.logo{font:800 22px "Bricolage Grotesque",sans-serif}.logo b{color:var(--hot)}
+h1{font-size:clamp(40px,8vw,84px);font-weight:800;letter-spacing:-.03em;margin-top:28px;max-width:11ch}
+.sub{color:var(--mute);max-width:46ch;margin-top:16px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:32px 0 20px}
+.tabs button{border:1.5px solid var(--ink);background:none;color:var(--ink);padding:8px 16px;border-radius:99px;font:600 15px Figtree,sans-serif;cursor:pointer}
+.tabs button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px;padding-bottom:60px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column}
+.card img{width:100%;aspect-ratio:1;object-fit:cover;background:#e5e2da}
+.body{padding:14px 16px 18px;display:flex;flex-direction:column;gap:6px;flex:1}
+.body h3{font-size:19px;font-weight:600}
+.price{font-weight:600;color:var(--blue)}
+@media(prefers-color-scheme:dark){.price{color:#8ea0ff}}
+.btn{margin-top:auto;display:block;text-align:center;text-decoration:none;border:0;cursor:pointer;padding:11px;border-radius:10px;font:600 15px Figtree,sans-serif;color:#fff}
+.amz{background:var(--ink);color:var(--bg)}.ord{background:var(--hot)}
+.tag{font-size:13px;color:var(--mute)}
+dialog{border:0;border-radius:var(--r);padding:24px;width:min(440px,92vw);background:var(--card);color:var(--ink)}
+dialog::backdrop{background:rgba(0,0,0,.55)}
+label{display:block;font-weight:600;font-size:14px;margin-top:12px}
+input,textarea,select{width:100%;margin-top:4px;padding:10px;border:1.5px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit}
+input:focus,textarea:focus,button:focus-visible,a:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.hp{position:absolute;left:-9999px}
+#msg{margin-top:12px;font-weight:600}
+footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--mute);font-size:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="logo">Unstoppable <b>Tech</b></div>
+  <h1>Gear that keeps up with you.</h1>
+  <p class="sub">Phones, computer and phone accessories, and creator gear like tripods and ring lights.</p>
+  <div class="tabs" id="tabs" role="group" aria-label="Categories"></div>
+</header>
+<main><div class="grid" id="grid"></div></main>
+<footer>
+  <p>As an Amazon Associate I earn from qualifying purchases. Products marked "Buy on Amazon" open Amazon in a new tab.</p>
+  <p>Order details you enter here are used only to deliver your order.</p>
+  <p>&copy; Unstoppable Tech</p>
+</footer>
+</div>
+
+<dialog id="dlg">
+  <h2 style="font-size:26px" id="dTitle">Order</h2>
+  <p class="tag" id="dPrice"></p>
+  <form id="f">
+    <label>Full name<input name="name" required autocomplete="name"></label>
+    <label>Phone number<input name="phone" required inputmode="numeric" pattern="[0-9]{10}" maxlength="10" autocomplete="tel" placeholder="10-digit mobile number"></label>
+    <label>Full address<textarea name="address" rows="3" required autocomplete="street-address" placeholder="House no, street, area, city, state"></textarea></label>
+    <label>Pincode<input name="pincode" required inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="postal-code"></label>
+    <label>Quantity<input name="qty" type="number" min="1" max="10" value="1" required></label>
+    <label>Payment<select name="payment"><option>Cash on delivery</option><option>Pay by UPI (I will contact you)</option></select></label>
+    <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <div style="display:flex;gap:10px;margin-top:18px">
+      <button class="btn ord" style="flex:1;margin:0" id="send">Place order</button>
+      <button class="btn amz" style="margin:0;padding:11px 18px" type="button" id="close">Cancel</button>
+    </div>
+    <div id="msg" role="status"></div>
+  </form>
+</dialog>
+
+<script>
+// EDIT YOUR PRODUCTS HERE.
+// type "amazon": add your affiliate link in url.  type "meesho": customer orders on your site.
+// img: put a file in an images/ folder (e.g. "images/tripod.jpg") or paste a full image link.
+const PRODUCTS = [
+  {name:"Smartphone (sample)", cat:"Phones", price:14999, type:"meesho", img:"", url:""},
+  {name:"Phone case (sample)", cat:"Phone accessories", price:199, type:"meesho", img:"", url:""},
+  {name:"Fast charger 33W (sample)", cat:"Phone accessories", price:499, type:"amazon", img:"", url:"https://www.amazon.in/dp/XXXXXXXXXX?tag=YOURTAG-21"},
+  {name:"Wireless mouse (sample)", cat:"Computer accessories", price:399, type:"amazon", img:"", url:"https://www.amazon.in/dp/XXXXXXXXXX?tag=YOURTAG-21"},
+  {name:"Tripod stand (sample)", cat:"Creator gear", price:599, type:"meesho", img:"", url:""},
+  {name:"Ring light 10 inch (sample)", cat:"Creator gear", price:799, type:"meesho", img:"", url:""}
+];
+const grid=document.getElementById('grid'),tabs=document.getElementById('tabs'),dlg=document.getElementById('dlg'),f=document.getElementById('f'),msg=document.getElementById('msg');
+let current=null,cat="All";
+const ph=n=>'data:image/svg+xml;utf8,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#e5e2da"/><text x="100" y="108" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#8a8579">${n.replace(/[<&]/g,'')}</text></svg>`);
+function render(){
+  const cats=["All",...new Set(PRODUCTS.map(p=>p.cat))];
+  tabs.innerHTML="";
+  cats.forEach(c=>{const b=document.createElement('button');b.textContent=c;b.setAttribute('aria-pressed',c===cat);b.onclick=()=>{cat=c;render()};tabs.appendChild(b)});
+  grid.innerHTML="";
+  PRODUCTS.filter(p=>cat==="All"||p.cat===cat).forEach((p,i)=>{
+    const d=document.createElement('div');d.className='card';
+    d.innerHTML=`<img alt="${p.name}" loading="lazy" src="${p.img||ph(p.name)}"><div class="body"><span class="tag">${p.cat}</span><h3>${p.name}</h3><div class="price">₹${p.price.toLocaleString('en-IN')}</div></div>`;
+    const b=document.createElement(p.type==="amazon"?'a':'button');
+    if(p.type==="amazon"){b.href=p.url;b.target="_blank";b.rel="noopener sponsored";b.textContent="Buy on Amazon";b.className="btn amz"}
+    else{b.textContent="Order now";b.className="btn ord";b.onclick=()=>openOrder(p)}
+    d.querySelector('.body').appendChild(b);grid.appendChild(d);
+  });
+}
+function openOrder(p){current=p;document.getElementById('dTitle').textContent=p.name;document.getElementById('dPrice').textContent="₹"+p.price.toLocaleString('en-IN');msg.textContent="";f.reset();dlg.showModal()}
+document.getElementById('close').onclick=()=>dlg.close();
+f.onsubmit=async e=>{
+  e.preventDefault();const btn=document.getElementById('send');btn.disabled=true;msg.textContent="Sending your order...";
+  const data=Object.fromEntries(new FormData(f));data.product=current.name;data.price=current.price*data.qty;
+  try{
+    const r=await fetch('/.netlify/functions/order',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+    if(!r.ok)throw 0;msg.textContent="Order placed. We will contact you on your phone number to confirm.";f.reset();
+  }catch{msg.textContent="Order not sent. Check your details and try again."}
+  btn.disabled=false;
+};
+render();
+</script>
+</body>
+</html>
