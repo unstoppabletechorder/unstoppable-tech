@@ -1,13 +1,6 @@
 // Receives an order from the website and sends it to your Telegram.
 exports.handler = async (event) => {
-  if (event.httpMethod === "GET") {
-    const t = process.env.BOT_TOKEN || "";
-    const c = process.env.CHAT_ID || "";
-    return {
-      statusCode: 200,
-      body: `BOT_TOKEN: ${t ? "set, length " + t.length : "MISSING"}\nCHAT_ID: ${c ? "set, value " + c : "MISSING"}`,
-    };
-  }
+
   if (event.httpMethod !== "POST") return { statusCode: 405, body: "Method not allowed" };
   let o;
   try { o = JSON.parse(event.body); } catch { return { statusCode: 400, body: "Bad request" }; }
