@@ -4,46 +4,53 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Unstoppable Tech - Phones, accessories and creator gear</title>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f3f1ec;--ink:#17202a;--mute:#5d6873;--card:#fff;--line:#ddd9d0;--hot:#ff4d2e;--blue:#1d3cff;--r:14px}
-@media(prefers-color-scheme:dark){:root{--bg:#10151b;--ink:#eef0f2;--mute:#9aa5b0;--card:#18202a;--line:#27313c}}
+:root{--ink:#070707;--panel:#101010;--line:#2a2a2a;--white:#f5f5f5;--mute:#9a9a9a;--red:#e4002b;--r2:#ff3a55;--cut:18px}
 *{box-sizing:border-box}html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Figtree,system-ui,sans-serif}
-h1,h2,h3{font-family:"Bricolage Grotesque",Figtree,sans-serif;line-height:1.05;margin:0}
+body{margin:0;background:var(--ink);color:var(--white);font:16px/1.55 Barlow,system-ui,sans-serif;
+background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:44px 44px}
+h1,h2,h3{font-family:"Chakra Petch",Barlow,sans-serif;margin:0}
 .wrap{max-width:1100px;margin:auto;padding:0 20px}
-header{padding:56px 0 28px}
-.logo{font:800 22px "Bricolage Grotesque",sans-serif}.logo b{color:var(--hot)}
-h1{font-size:clamp(40px,8vw,84px);font-weight:800;letter-spacing:-.03em;margin-top:28px;max-width:11ch}
-.sub{color:var(--mute);max-width:46ch;margin-top:16px}
-.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:32px 0 20px}
-.tabs button{border:1.5px solid var(--ink);background:none;color:var(--ink);padding:8px 16px;border-radius:99px;font:600 15px Figtree,sans-serif;cursor:pointer}
-.tabs button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px;padding-bottom:60px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column}
-.card img{width:100%;aspect-ratio:1;object-fit:cover;background:#e5e2da}
+header{padding:48px 0 24px;position:relative}
+.logo{font:700 clamp(26px,5vw,38px) "Chakra Petch",sans-serif;letter-spacing:.14em;text-transform:uppercase;display:inline-block;padding:10px 22px;border:3px solid var(--white);clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,0 100%)}
+.logo b{color:var(--red)}
+h1{font-size:clamp(46px,10vw,112px);font-weight:700;line-height:.95;letter-spacing:-.02em;margin-top:44px;max-width:12ch;text-transform:uppercase}
+h1 span{display:inline-block;background:var(--red);color:var(--white);padding:0 .15em;margin-left:-.05em;clip-path:polygon(0 0,100% 0,calc(100% - .18em) 100%,0 100%);animation:slide .7s cubic-bezier(.2,.8,.2,1) both}
+@keyframes slide{from{clip-path:polygon(0 0,0 0,0 100%,0 100%)}}
+.sub{color:var(--mute);max-width:46ch;margin:22px 0 0;font-size:18px}
+.tabs{display:flex;gap:10px;flex-wrap:wrap;margin:36px 0 22px}
+.tabs button{border:1.5px solid var(--line);background:var(--panel);color:var(--white);padding:9px 18px;font:500 15px "Chakra Petch",sans-serif;cursor:pointer;clip-path:polygon(0 0,calc(100% - 9px) 0,100% 9px,100% 100%,0 100%);transition:background .15s,border-color .15s}
+.tabs button:hover{border-color:var(--red)}
+.tabs button[aria-pressed=true]{background:var(--red);border-color:var(--red)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px;padding-bottom:70px}
+.card{background:var(--panel);border:1px solid var(--line);border-top:3px solid var(--red);display:flex;flex-direction:column;clip-path:polygon(0 0,calc(100% - var(--cut)) 0,100% var(--cut),100% 100%,0 100%);transition:transform .15s,border-color .15s}
+.card:hover{transform:translateY(-4px);border-color:var(--r2)}
+.card img{width:100%;aspect-ratio:1;object-fit:cover;background:#1b1b1b;border-bottom:1px solid var(--line)}
 .body{padding:14px 16px 18px;display:flex;flex-direction:column;gap:6px;flex:1}
-.body h3{font-size:19px;font-weight:600}
-.price{font-weight:600;color:var(--blue)}
-@media(prefers-color-scheme:dark){.price{color:#8ea0ff}}
-.btn{margin-top:auto;display:block;text-align:center;text-decoration:none;border:0;cursor:pointer;padding:11px;border-radius:10px;font:600 15px Figtree,sans-serif;color:#fff}
-.amz{background:var(--ink);color:var(--bg)}.ord{background:var(--hot)}
-.tag{font-size:13px;color:var(--mute)}
-dialog{border:0;border-radius:var(--r);padding:24px;width:min(440px,92vw);background:var(--card);color:var(--ink)}
-dialog::backdrop{background:rgba(0,0,0,.55)}
+.body h3{font-size:20px;font-weight:700;line-height:1.15}
+.price{font:700 22px "Chakra Petch",sans-serif;color:var(--white)}
+.tag{font-size:14px;color:var(--mute)}
+.btn{margin-top:auto;display:block;text-align:center;text-decoration:none;border:0;cursor:pointer;padding:12px;font:700 16px "Chakra Petch",sans-serif;color:var(--white);clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,0 100%);transition:background .15s,color .15s}
+.amz{background:var(--white);color:var(--ink)}.amz:hover{background:#d8d8d8}
+.ord{background:var(--red)}.ord:hover{background:var(--r2)}
+dialog{border:2px solid var(--red);padding:24px;width:min(440px,92vw);background:var(--ink);color:var(--white)}
+dialog::backdrop{background:rgba(0,0,0,.8)}
 label{display:block;font-weight:600;font-size:14px;margin-top:12px}
-input,textarea,select{width:100%;margin-top:4px;padding:10px;border:1.5px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit}
-input:focus,textarea:focus,button:focus-visible,a:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+input,textarea,select{width:100%;margin-top:4px;padding:10px;border:1.5px solid var(--line);background:var(--panel);color:var(--white);font:inherit}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--red)}
+button:focus-visible,a:focus-visible{outline:3px solid var(--white);outline-offset:2px}
 .hp{position:absolute;left:-9999px}
 #msg{margin-top:12px;font-weight:600}
 footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--mute);font-size:14px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
 <div class="wrap">
 <header>
   <div class="logo">Unstoppable <b>Tech</b></div>
-  <h1>Gear that keeps up with you.</h1>
+  <h1>Level up your <span>setup.</span></h1>
   <p class="sub">Phones, computer and phone accessories, and creator gear like tripods and ring lights.</p>
   <div class="tabs" id="tabs" role="group" aria-label="Categories"></div>
 </header>
@@ -68,7 +75,7 @@ footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--mute);fo
     <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
     <div style="display:flex;gap:10px;margin-top:18px">
       <button class="btn ord" style="flex:1;margin:0" id="send">Place order</button>
-      <button class="btn amz" style="margin:0;padding:11px 18px" type="button" id="close">Cancel</button>
+      <button class="btn amz" style="margin:0;padding:12px 18px" type="button" id="close">Cancel</button>
     </div>
     <div id="msg" role="status"></div>
   </form>
@@ -78,8 +85,9 @@ footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--mute);fo
 // EDIT YOUR PRODUCTS HERE.
 // type "amazon": add your affiliate link in url.  type "meesho": customer orders on your site.
 // img: put a file in an images/ folder (e.g. "images/tripod.jpg") or paste a full image link.
+// Every line ends with a comma EXCEPT the last one.
 const PRODUCTS = [
-  {name:"Gaming Cooler", cat:"Phone accessories", price:800, type:"amazon", img:"https://i.ibb.co/TxfqqP2H/Screenshot-2026-10-06-at-9-08-39-AM.png", url:"https://amzn.openinapp.link/h4hl8"},
+  {name:"Gaming Cooler", cat:"Phone accessories", price:800, type:"amazon", img:"https://i.ibb.co/TnYM7RM/51w-TPU8-THDL-SS40.jpg", url:"https://amzn.openinapp.link/h4hl8"},
   {name:"Fast charger 33W (sample)", cat:"Phone accessories", price:499, type:"amazon", img:"", url:"https://www.amazon.in/dp/XXXXXXXXXX?tag=YOURTAG-21"},
   {name:"Wireless mouse (sample)", cat:"Computer accessories", price:399, type:"amazon", img:"", url:"https://www.amazon.in/dp/XXXXXXXXXX?tag=YOURTAG-21"},
   {name:"Tripod stand (sample)", cat:"Creator gear", price:599, type:"meesho", img:"", url:""},
@@ -87,7 +95,7 @@ const PRODUCTS = [
 ];
 const grid=document.getElementById('grid'),tabs=document.getElementById('tabs'),dlg=document.getElementById('dlg'),f=document.getElementById('f'),msg=document.getElementById('msg');
 let current=null,cat="All";
-const ph=n=>'data:image/svg+xml;utf8,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#e5e2da"/><text x="100" y="108" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#8a8579">${n.replace(/[<&]/g,'')}</text></svg>`);
+const ph=n=>'data:image/svg+xml;utf8,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#1b1b1b"/><path d="M0 200L200 0v40L40 200z" fill="#e4002b" opacity=".35"/><text x="100" y="108" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#9a9a9a">${n.replace(/[<&]/g,'')}</text></svg>`);
 function render(){
   const cats=["All",...new Set(PRODUCTS.map(p=>p.cat))];
   tabs.innerHTML="";
