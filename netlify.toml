@@ -1,0 +1,4 @@
+[build]
+  base = "UNSTOPPABLE TECH ORDERS"
+  publish = "."
+  functions = "netlify/functions"
