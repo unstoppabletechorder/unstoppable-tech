@@ -1,8 +1,12 @@
 // Receives an order from the website and sends it to your Telegram.
 // Set BOT_TOKEN and CHAT_ID in Netlify > Site settings > Environment variables.
 exports.handler = async (event) => {
-  if (event.httpMethod !== "POST") return { statusCode: 405, body: "Method not allowed" };
-  let o;
+ if (event.httpMethod === "GET") {
+  const t = process.env.BOT_TOKEN || "";
+  const c = process.env.CHAT_ID || "";
+  return { statusCode: 200, body: `BOT_TOKEN: ${t ? "set, length " + t.length : "MISSING"}\nCHAT_ID: ${c ? "set, value " + c : "MISSING"}` };
+}
+if (event.httpMethod !== "POST") return { statusCode: 405, body: "Method not allowed" };
   try { o = JSON.parse(event.body); } catch { return { statusCode: 400, body: "Bad request" }; }
   if (o.website) return { statusCode: 200, body: "ok" }; // spam trap
   const clean = (s, n = 300) => String(s || "").replace(/[<>]/g, "").trim().slice(0, n);
