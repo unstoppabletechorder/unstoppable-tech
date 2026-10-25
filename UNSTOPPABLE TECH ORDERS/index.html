@@ -61,21 +61,20 @@ header {
 }
 
 .logo {
-  font: 400 clamp(28px, 6.5vw, 56px)/1.1 Michroma, "Chakra Petch", sans-serif;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  clip-path: none;
   max-width: 100%;
-  padding: 14px 28px;
-  border: 4px solid var(--white);
-  -webkit-text-stroke: 1.5px currentColor;
-  clip-path: polygon(
-    0 0,
-    calc(100% - 18px) 0,
-    100% 18px,
-    100% 100%,
-    0 100%
-  );
+}
+
+.logo img {
+  display: block;
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
 }
 
 .logo b {
