@@ -19,6 +19,75 @@
   --r2: #ff3a55;
   --cut: 18px;
 }
+.logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 18px;
+  text-decoration: none;
+  padding: 12px 20px;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  max-width: 100%;
+  position: relative;
+}
+
+.logo::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 95px;
+  right: -20px;
+  border: 3px solid #e4002b;
+  background: rgba(7, 7, 7, 0.95);
+  box-shadow: 0 0 18px rgba(228, 0, 43, 0.35);
+  z-index: -1;
+}
+
+.logo img {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  border: 2px solid #e4002b;
+  border-radius: 50%;
+  padding: 4px;
+}
+
+.brand-name {
+  display: inline-block;
+  color: #ffffff;
+  font-family: "Chakra Petch", sans-serif;
+  font-size: 42px;
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.brand-name b {
+  color: #e4002b;
+  font-weight: 900;
+}
+
+@media (max-width: 600px) {
+  .logo {
+    gap: 10px;
+    padding: 8px;
+  }
+
+  .logo img {
+    width: 58px;
+    height: 58px;
+  }
+
+  .brand-name {
+    font-size: clamp(17px, 5vw, 25px);
+    letter-spacing: 0;
+  }
+}
 
 * {
   box-sizing: border-box;
@@ -365,13 +434,17 @@ footer {
 <body>
 <div class="wrap">
 
-<header>
-  <a href="/" class="logo" aria-label="Unstoppable Tech Home">
-    <img
-      src="https://i.ibb.co/q3SccvW5/5d301388-d21d-48cd-8efb-62aede3e6840.png"
-      alt="UT Logo">
-  </a>
 
+ <header>
+  <a href="/" class="logo" aria-label="Unstoppable Tech Home">
+  <img
+    src="https://i.ibb.co/q3SccvW5/5d301388-d21d-48cd-8efb-62aede3e6840.png"
+    alt="UT Logo">
+
+  <span class="brand-name">
+    UNSTOPPABLE <b>TECH</b>
+  </span>
+</a>
   <h1>Level up your <span>setup.</span></h1>
 
   <p class="sub">
