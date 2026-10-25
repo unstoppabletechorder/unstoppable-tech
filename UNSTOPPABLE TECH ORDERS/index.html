@@ -69,12 +69,17 @@ header {
   clip-path: none;
   max-width: 100%;
 }
-
 .logo img {
   display: block;
-  width: 64px;
-  height: 64px;
+  width: 90px;
+  height: 90px;
   object-fit: contain;
+  border: 2px solid var(--red);
+  border-radius: 50%;
+  padding: 5px;
+  background: #070707;
+  box-shadow: 0 0 15px rgba(228, 0, 43, 0.4);
+
 }
 
 .logo b {
@@ -361,7 +366,11 @@ footer {
 <div class="wrap">
 
 <header>
-  <div class="logo">Unstoppable <b>Tech</b></div>
+  <a href="/" class="logo" aria-label="Unstoppable Tech Home">
+    <img
+      src="https://i.ibb.co/q3SccvW5/5d301388-d21d-48cd-8efb-62aede3e6840.png"
+      alt="UT Logo">
+  </a>
 
   <h1>Level up your <span>setup.</span></h1>
 
